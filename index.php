@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Notes</title>
+  <title>Notes</title>
 
-	<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" data-auto-replace-svg="nest"></script>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+
+  <link href="https://fonts.googleapis.com/css2?family=Emblema+One&family=Lora&family=Overpass:ital,wght@0,400;1,100&display=swap" rel="stylesheet">
 
 <style type="text/css">
   * {
@@ -77,36 +79,75 @@ input[type=text]:focus, input[type=password]:focus {
   background-color: #ddd;
   outline: none;
 }
+
+/*nav styles*/
+#nav {
+  background-color: white;
+  box-shadow: 0 6px 20px 0 rgb(0 0 0 / 19%); 
+  margin-bottom: 40px;
+}
+#nav-content {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  flex-flow: row wrap;
+  font-family: Overpass, sans-serif !important;
+}
+.logo {
+  font-size: 45px;
+  color: #196db6;
+  font-weight: 800;
+}
+.home {
+  font-size: 25px;
+  font-weight: 800;
+}
+.home a {
+  text-decoration: none;
+  color: #196db6;
+  margin-right: 10px;
+  transition: color 200ms;
+}
+.home a:hover {
+  color: #3592e3;
+}
+.fa-home {
+  margin-right: 5px;
+}
+
+.alignleft {
+width:33.33333%;
+text-align:left;
+}
+.aligncenter {
+width:33.33333%;
+text-align:center;
+}
+.alignright {
+width:33.33333%;
+text-align:right;
+}
+body {
+    background-color: #ECF5F9;
+}
+
 </style>
 
 </head>
-<body style="background-color: #e6e6e6;">
+<body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light box-shadow" style="margin-bottom: 40px;" >
-  <div class="container-fluid">
-    <a class="h3" href="#" style="text-decoration: none; color: inherit; margin-top: 5px;">John Fedak</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-     <a id="nav-tog"> <span class="navbar-toggler-icon"></span></a>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link nav-link-margin" aria-current="page" href="https://johnfedak.com/">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link active dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Projects
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <li><a class="dropdown-item" href="https://johnfedak.com/quacker/">Social Media</a></li>
-            <li><a class="dropdown-item" href="https://johnfedak.com/projects/weather/">Weather API</a></li>
-            <li><a class=" active dropdown-item" href="https://johnfedak.com/projects/notes/">Notes</a></li>
-        </li>
-      </ul>
+<!--navbar-->
+  <div id="nav" class="container-fluid">
+    <div class="row">
+      <div id="nav-content" class="col-12">
+        <div class="alignleft"></div>
+      <div class="logo aligncenter">JF</div>
+      <div class="home alignright"><a href="https://johnfedak.com/"><i class="fas fa-home fa-sm"></i>Home</a></div>
     </div>
   </div>
-</nav>
+</div>
 
+<!--create new note-->
 <div style="display: flex; justify-content: center;">
   <div class="create-note bg-light">
 	  <button id="new-note" type="button" class="btn btn-primary" style="font-size: 1.3em;">Create new note +</button>
@@ -114,11 +155,14 @@ input[type=text]:focus, input[type=password]:focus {
   </div>
 </div>
 
+<!--display notes-->
 <div class="container-fluid container-style">
 	<div id="user-notes" class="row" style="padding: 5px;"></div>
 </div>
 
-<!-- New note modal -->
+<!--note modal's-->
+
+<!--new note modal-->
 <div id="new-note-modal" class="modal fade" tabindex="-1" data-bs-backdrop="static">
   <div class="modal-dialog">
     <div class="modal-content modal-border-radius">
@@ -126,23 +170,19 @@ input[type=text]:focus, input[type=password]:focus {
         <h1 class="modal-title display-6 modal-title-text">New note</h1>
       </div>
       <div class="modal-body">
-
       	<div class="mb-3">
           <label class="form-label modal-header-text">Note header</label>
           <textarea id="note-header" class="form-control" style="resize: none;" placeholder="Enter note header" maxlength="25" rows="1"></textarea>
         </div>
-
         <div class="mb-3">
          <label class="form-label modal-header-text">Note body</label>
          <textarea id="note-body" class="form-control" style="resize: none;" placeholder="Enter note body" maxlength="200" rows="4"></textarea>
         </div>
-
         <!-- WARNING MESSAGE -->
         <div id="new-note-warning" style="margin-bottom: 7px; display: none;">
           <i class="fas fa-exclamation-circle text-danger"></i>
           <span class="text-danger" id="new-note-message">Warning</span> 
         </div>
-
         <div class="mb-3">
           <div class="row">
             <div class="col-6">
@@ -199,23 +239,19 @@ input[type=text]:focus, input[type=password]:focus {
         <h1 class="modal-title display-6 modal-title-text">Edit note</h1>
       </div>
       <div class="modal-body">
-
       	<div class="mb-3">
           <label class="form-label modal-header-text">Note header</label>
           <textarea id="edit-note-header" class="form-control" style="resize: none;" placeholder="Enter note header" maxlength="25" rows="1"></textarea>
         </div>
-
         <div class="mb-3">
          <label class="form-label modal-header-text">Note body</label>
          <textarea id="edit-note-body" class="form-control" style="resize: none;" placeholder="Enter note body" maxlength="200" rows="4"></textarea>
         </div>
-
         <!-- WARNING MESSAGE -->
         <div id="edit-note-warning" style="margin-bottom: 7px; display: none;">
           <i class="fas fa-exclamation-circle text-danger"></i>
           <span class="text-danger" id="edit-note-message">Warning</span> 
         </div>
-
         <div class="mb-3">
           <div class="row">
             <div class="col-6">
@@ -406,7 +442,6 @@ $(document).on('click', ".edit", function () {
 	var note_header = $(this).closest("h5").children("div").html().trim();
 	var note_body   = $(this).closest("h5").siblings().children("p").html().trim();
 	var note_color  = $(this).closest("h5").parent().parent().parent().attr("note-color").trim();
-  alert(note_color);
 	$("#edit-note-color").html(note_color);
 	
 
